@@ -1,0 +1,29 @@
+version: "3"
+services:
+  ochrona-app:
+    build: .
+    ports:
+      - "443:8443"
+    networks:
+      - mynet
+    depends_on:
+      - dbpostgresql
+    environment:
+          - SPRING_DATASOURCE_URL=jdbc:postgresql://dbpostgresql:5432/postgres
+          - SPRING_DATASOURCE_USERNAME=postgres
+          - SPRING_DATASOURCE_PASSWORD=mysecretpassword
+          - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  dbpostgresql:
+    image: 'postgres:14'
+
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    driver: bridge
