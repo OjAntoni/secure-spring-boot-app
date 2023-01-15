@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<form th:action="@{/user/login}" method="POST" enctype="utf8">
+    <div>
+        <label>username</label>
+        <input  name="username"/>
+    </div>
+    <div>
+        <label>password</label>
+        <input name="password"/>
+    </div>
+    <button type="submit">submit</button>
+</form>
+
+<p style="color: red" th:text="${error}"></p>
+<a th:href="@{/user/registration}">registration</a>
+</body>
+</html>

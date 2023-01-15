@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>Registration form</h1>
+<form th:action="@{/user/registration}" th:object="${user}" method="POST" enctype="utf8">
+    <div>
+        <label>first name</label>
+        <input th:field="*{username}"/>
+        <th:block th:if="${#fields.hasErrors('username')}">
+            <div class="form-text">
+                <p style="color: red" th:errors="*{username}"></p>
+            </div>
+        </th:block>
+    </div>
+    <div>
+        <label>email</label>
+        <input type="email" th:field="*{email}"/>
+        <th:block th:if="${#fields.hasErrors('email')}">
+            <div class="form-text">
+                <p style="color: red" th:errors="*{email}"></p>
+            </div>
+        </th:block>
+    </div>
+    <div>
+        <label>password</label>
+        <input type="password" th:field="*{password}"/>
+        <th:block th:if="${#fields.hasErrors('password')}">
+            <div class="form-text">
+                <p style="color: red" th:errors="*{password}"></p>
+            </div>
+        </th:block>
+    </div>
+    <div>
+        <label>confirm</label>
+        <input type="password" th:field="*{matchingPassword}"/>
+    </div>
+    <button type="submit">submit</button>
+</form>
+
+<a th:href="@{/login.html}">login</a>
+</body>
+</html>
