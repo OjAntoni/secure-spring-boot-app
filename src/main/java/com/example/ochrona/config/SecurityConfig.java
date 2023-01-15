@@ -20,7 +20,7 @@ import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -29,12 +29,12 @@ public class SecurityConfig{
                 .headers().xssProtection().and().contentSecurityPolicy("script-src 'self'");
         http
                 .authorizeHttpRequests(
-                req -> req.requestMatchers( "/user/registration", "/resources/**").permitAll()
-                        .anyRequest().authenticated()
-        ).formLogin(
-                form -> form.loginPage("/user/login").loginProcessingUrl("/user/login")
-                        .permitAll().defaultSuccessUrl("/", true)
-        ).logout().logoutSuccessUrl("/user/login").invalidateHttpSession(true).clearAuthentication(true).permitAll();
+                        req -> req.requestMatchers("/user/registration", "/resources/**").permitAll()
+                                .anyRequest().authenticated()
+                ).formLogin(
+                        form -> form.loginPage("/user/login").loginProcessingUrl("/user/login")
+                                .permitAll().defaultSuccessUrl("/", true)
+                ).logout().logoutSuccessUrl("/user/login").invalidateHttpSession(true).clearAuthentication(true).permitAll();
         return http.build();
     }
 
@@ -44,7 +44,7 @@ public class SecurityConfig{
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new Pbkdf2PasswordEncoder("secret", 16, 200001, Pbkdf2PasswordEncoder.SecretKeyFactoryAlgorithm.PBKDF2WithHmacSHA512);
     }
 }
